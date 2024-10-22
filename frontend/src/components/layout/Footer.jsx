@@ -37,7 +37,7 @@ const Footer = () => {
           <p >Transform your vision into a professional website that speaks volumes about your brand.  </p>
           <div className="max-w-7xl mx-auto flex justify-center space-x-4">
         <a 
-          href="https://www.instagram.com/ajith____b/profilecard/?igsh=d2lwZHg1Y2hqeHl4" 
+          href="https://www.instagram.com/ajith____b?igsh=MTQ2Z3Nuc2RwejR2Mw==" 
           target="_blank" 
           rel="noopener noreferrer" 
           className="hover:text-gray-400"
