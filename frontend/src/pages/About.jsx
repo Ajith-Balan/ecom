@@ -14,11 +14,14 @@ const About = () => {
           <img src={aboutImage} alt="About CJ Attire" className="w-full h-48 object-cover rounded-md mb-4" />
 
           <p className="mb-4">
-            Starting in 2023, the brand benefited greatly when e-commerce businesses were skyrocketing. Having an online store was therefore not only necessary but also inevitable. Straight after its onset, the brand initiated a crowd-favourite trend—being The Oversized Tee, making it mainstream, creating popular demand, and as a result, it was adopted by various other brands in recent times.
+            Started in 2023, CJ Attire thrived as e-commerce soared, making an online presence not just essential but inevitable. From the outset, the brand embraced and popularized a crowd-favorite trend—the Oversized Tee—pushing it into the mainstream. This trend sparked massive demand, inspiring numerous other brands to follow suit.
+
+
+
           </p>
 
           <p className="mb-4">
-            Join us on this fashion revolution as we break free from conventions, embrace our individuality, and celebrate street culture. CJ Attire is more than a brand; it's a statement. Get ready to unleash your unapologetic style with us.
+            Join us in this fashion revolution as we defy conventions, embrace individuality, and celebrate the essence of street culture. CJ Attire is more than just a brand; it’s a bold statement. Get ready to unleash your unapologetic style with us.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
