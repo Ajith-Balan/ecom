@@ -13,7 +13,9 @@ try {
             message:'category already exists'
         })
     }
-    const category = await new categoryModel({name,photo}).save()
+    const category = await new categoryModel.create({
+      name,photo
+    })
     res.status(201).send({
         success:true,
         message:'new category created',

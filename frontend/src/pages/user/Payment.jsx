@@ -4,13 +4,15 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../context/Auth';
-import qr from '../../../src/assets/paymentqr.jpeg'
+import qr from '../../../src/assets/paymentqr.jpeg';
+
 const Payment = () => {
   const navigate = useNavigate();
   const [auth] = useAuth();
   const { id } = useParams();
   const [photo, setPhoto] = useState("");
   const [loading, setLoading] = useState(false); // Loading state for confirming order
+  const [sizes, setSizes] = useState([]); // State for sizes array
 
   const [state, setState] = useState({
     productName: "",
@@ -45,13 +47,17 @@ const Payment = () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_APP_BACKEND}/api/v1/product/getone-product/${id}`);
       const product = res.data;
+      
+      // Set sizes based on the product size
+      setSizes(product.size ? product.size.split('/') : []);
+      
       setState(prevState => ({
         ...prevState,
         productName: product.name,
         productphoto: product.photo,
         productDescription: product.description,
         productPrice: product.price,
-        size: product.size , // Make sure you have size options in product
+        size: product.size || '', // Set initial size if available
         loading: false,
         totalPrice: product.price * prevState.quantity,
       }));
@@ -80,11 +86,6 @@ const Payment = () => {
     });
   };
 
-  const sizes = state.size.split('/');
-
-
-
-
   const handleScreenshotChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -108,7 +109,6 @@ const Payment = () => {
       };
     });
   }
-
 
   const handleConfirm = async () => {
     setLoading(true); // Set loading to true when confirming
@@ -202,12 +202,14 @@ const Payment = () => {
 
             {/* Size Selection */}
             <div className="mb-4">
+              <label htmlFor="size" className="block text-gray-700 font-medium mb-2">Select Size</label>
               <select
                 id="size"
                 className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={state.size}
                 onChange={(e) => setState({ ...state, size: e.target.value })}
               >
+                <option value="" disabled>Select a size</option> {/* Default option */}
                 {sizes.map((Size) => (
                   <option key={Size} value={Size}>
                     {Size}
@@ -247,7 +249,7 @@ const Payment = () => {
               <input
                 type="text"
                 className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                id="userPhone"
+                id="phone"
                 value={state.userPhone}
                 readOnly
               />
@@ -256,67 +258,39 @@ const Payment = () => {
               <input
                 type="text"
                 className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                id="user2Phone"
-                placeholder="Phone number 2"
+                id="address"
+                placeholder='Enter your full address'
+                value={state.userAddress}
+                onChange={(e) => setState({ ...state, userAddress: e.target.value })}
+
+              />
+            </div>
+            <div className="mb-4">
+              <input
+                type="number"
+                className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                id="user2phone"
+                placeholder="Alternative Phone Number"
                 value={state.user2Phone}
                 onChange={(e) => setState({ ...state, user2Phone: e.target.value })}
               />
             </div>
+
+            {/* Screenshot Upload */}
             <div className="mb-4">
-              <input
-                type="text"
-                className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                id="userAddress"
-                value={state.userAddress} 
-                placeholder="Enter your full address"
-
-                onChange={(e) => setState({ ...state, userAddress: e.target.value })}
-              />
-            </div>
-            <div className="mb-4 p-4 border rounded shadow-md">
-      <h3 className="text-lg font-semibold mb-2">Payment Information</h3>
-      
-      <div className="mb-2">
-        <img 
-          src={qr} // Replace with the actual path to your QR code image
-          alt="Payment QR Code"
-          className="w-32 h-32"
-        />
-      </div>
-      <div className="mb-2">
-        <p className="font-medium">Name : <span className="font-light">CJ ATTIRE</span></p>
-      </div>
-      <div className="mb-2">
-        <p className="font-medium">Bank  :<span className="font-light">Union Bank of India</span></p>
-      </div>
-      <div className="mb-2">
-        <p className="font-medium">Account Number: <span className="font-light">339502120000315</span></p>
-      </div>
-      
-      <div className="mb-2">
-        <p className="font-medium">IFSC Code: <span className="font-light">UBINO533955</span></p>
-      </div>
-      
-      <div>
-        <p className="text-sm text-gray-500">Scan the QR code or use the account details above for payment.</p>
-      </div>
-    </div>
-
-
-            <div className="mb-4">
-              <label htmlFor="screenshot" className="block text-gray-700 font-medium mb-2">Upload Screenshot of Payment</label>
+              <label htmlFor="screenshot" className="block text-gray-700 font-medium mb-2">Upload Screenshot</label>
               <input
                 type="file"
                 accept="image/*"
-                className="block w-full text-sm text-gray-500 border rounded p-2"
                 onChange={handleScreenshotChange}
+                className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
             <button
               onClick={handleConfirm}
-              className={`bg-blue-500 text-white px-4 py-2 rounded ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
               disabled={loading}
+              className={`w-full px-4 py-2 text-white font-semibold rounded shadow-md ${loading ? 'bg-gray-500' : 'bg-blue-500 hover:bg-blue-700'}`}
             >
               {loading ? 'Confirming...' : 'Confirm Order'}
             </button>

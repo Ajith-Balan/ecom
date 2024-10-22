@@ -10,11 +10,9 @@ const Dashboard = () => {
     <div className="container mx-auto p-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="bg-gray-200 p-4 rounded">
-          <h2 className="text-lg font-semibold">Column 1</h2>
 <UserMenu/>
         </div>
         <div className="bg-gray-200 p-4 rounded">
-          <h2 className="text-lg font-semibold">Column 2</h2>
                 <h1>{auth?.user?.name}</h1>
                 <h1>{auth?.user?.phone}</h1>
 

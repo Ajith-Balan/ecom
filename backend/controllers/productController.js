@@ -49,7 +49,6 @@ export async function getproductcontroller(req,res){
 
       const data=await productModel.find();
       res.status(200).send(data)
-      console.log(data);
   }catch (error){
       res.status(500).send(error)
   }
@@ -63,7 +62,6 @@ export async function getoneproduct(req,res) {
   try {
       const {id}=req.params;
       const data = await productModel.findOne({_id:id})
-      console.log(data);
       res.status(200).send(data)
   } catch (error) {
       res.status(400).send(error)
@@ -91,7 +89,6 @@ export async function updateproduct(req,res){
 export async function deleteproduct(req,res){
   try{
       const {id}=req.params;
-      console.log(id);
       await productModel.deleteOne({_id:id});
       res.status(200).send({msg:"sucessfully deleted"})
   }catch (error){
@@ -129,3 +126,29 @@ export const productCategoryController = async (req, res) => {
     });
   }
 };
+
+
+
+
+
+
+export const searchProductController = async(req,res)=>{
+  try {
+    const {keyword}= req.params
+    const results= await productModel.find({
+      $or:[
+        {name:{$regex : keyword,$options :"i"}},
+        {description:{$regex : keyword,$options:"i"}}
+      ]
+    })
+    res.send(results);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      error,
+      message:"error in search product"
+    })
+    
+  }
+}

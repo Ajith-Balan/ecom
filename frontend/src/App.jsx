@@ -29,6 +29,7 @@ import CartPage from './pages/CartPage';
 import Payment from './pages/user/Payment';
 import OrdersList from './pages/Admin/OrdersList';
 import Forget from './pages/Auth/Forget';
+import SearchResult from './pages/SearchResults';
 function App() {
   return (
     <>
@@ -39,6 +40,8 @@ function App() {
         <Route path='/product/:id' element={<ProductDetails />} />
         <Route path='/category/:id' element={<CategoryProduct />} />
         <Route path='/cart' element={<CartPage />} />
+        <Route path='/search' element={<SearchResult />} />
+
 
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />

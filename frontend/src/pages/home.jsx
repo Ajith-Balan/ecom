@@ -112,7 +112,6 @@ function Home() {
         )}
       </div>
 
-      <h1 className="text-center mt-6">E-commerce App</h1>
     </Layout>
   );
 }
