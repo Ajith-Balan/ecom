@@ -39,17 +39,25 @@ function Home() {
     <Link
       key={category._id}
       to={`/category/${category._id}`}
-      className="inline-block p-4  text-sm text-white transition-transform transform rounded shadow-md hover:shadow-lg hover:scale-105"
+      className="inline-block text-center transition-transform transform hover:scale-105"
     >
-      <img
-        className="h-16 w-16 object-cover rounded-full "
-        src={category.photo}
-        alt={category.name}
-      />
-      <h4 className="text-center text-black mt-2">{category.name}</h4>
+      <div className="flex flex-col items-center">
+        <div className="h-20 w-20 rounded-full overflow-hidden border-2 border-gray-300 shadow-md">
+          <img
+            className="h-full w-full object-cover"
+            src={category.photo}
+            alt={category.name}
+          />
+        </div>
+        <h4 className="mt-2 text-sm text-black text-center leading-tight">
+          {category.name}
+        </h4>
+      </div>
     </Link>
   ))}
 </div>
+
+
 
       
                    
