@@ -164,7 +164,7 @@ const Payment = () => {
         onChange={e => setState({ ...state, userAddress: e.target.value })}
       />
       <input
-        type="text"
+        type="number"
         placeholder="Alternative Phone"
         className="w-full border px-3 py-2 rounded mb-4"
         value={state.user2Phone}
