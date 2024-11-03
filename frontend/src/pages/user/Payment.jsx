@@ -205,6 +205,7 @@ const Payment = () => {
         <p className="text-sm text-gray-500">Scan the QR code or use the account details above for payment.</p>
       </div>
             </div>
+      <p className="text-center text-sm text-gray-500">upload payment screenshot</p>
       {/* Payment Details */}
       <div className="w-full mb-4">
   <label htmlFor="file-upload" className="flex items-center justify-center w-full p-4 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-all duration-300 shadow-md hover:shadow-lg">
