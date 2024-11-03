@@ -206,7 +206,17 @@ const Payment = () => {
       </div>
             </div>
       {/* Payment Details */}
-      <input type="file" onChange={handleScreenshotChange} className="w-full mb-4" />
+      <div className="w-full mb-4">
+  <label htmlFor="file-upload" className="flex items-center justify-center w-full p-4 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-all duration-300 shadow-md hover:shadow-lg">
+    <input id="file-upload" type="file" onChange={handleScreenshotChange} className="hidden" />
+    <span className="text-gray-500 font-semibold flex items-center space-x-2">
+      <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 7l9 9m0 0l9-9m-9 9V3"></path>
+      </svg>
+      <span>Upload Screenshot</span>
+    </span>
+  </label>
+</div>
       <button
         onClick={handleConfirm}
         disabled={loading}
