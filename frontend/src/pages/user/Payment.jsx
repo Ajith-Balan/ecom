@@ -147,7 +147,7 @@ const Payment = () => {
         <button className='px-3 py-2 bg-gray-300 text-gray-700 rounded-r focus:outline-none' onClick={() => handleQuantityChange('increase')}>+</button>
       </div>
 
-      <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded" onClick={() => setPhase(2)}>
+      <button className="mt-4 bg-red-500 text-white px-4 py-2 rounded" onClick={() => setPhase(2)}>
         Next: Enter Address
       </button>
     </div>
@@ -165,12 +165,12 @@ const Payment = () => {
       />
       <input
         type="number"
-        placeholder="Alternative Phone"
+        placeholder="Alternative Phone(optional)"
         className="w-full border px-3 py-2 rounded mb-4"
         value={state.user2Phone}
         onChange={e => setState({ ...state, user2Phone: e.target.value })}
       />
-      <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={() => setPhase(3)}>
+      <button className="bg-red-500 text-white px-4 py-2 rounded" onClick={() => setPhase(3)}>
         Next: Payment
       </button>
     </div>
@@ -205,7 +205,7 @@ const Payment = () => {
         <p className="text-sm text-gray-500">Scan the QR code or use the account details above for payment.</p>
       </div>
             </div>
-      <p className="text-center text-sm text-gray-500">upload payment screenshot</p>
+      
       {/* Payment Details */}
       <div className="w-full mb-4">
   <label htmlFor="file-upload" className="flex items-center justify-center w-full p-4 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-all duration-300 shadow-md hover:shadow-lg">
@@ -214,14 +214,14 @@ const Payment = () => {
       <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 7l9 9m0 0l9-9m-9 9V3"></path>
       </svg>
-      <span>Upload Screenshot</span>
+      <span>Upload Payment Screenshot</span>
     </span>
   </label>
 </div>
       <button
         onClick={handleConfirm}
         disabled={loading}
-        className={`w-full px-4 py-2 rounded ${loading ? 'bg-gray-500' : 'bg-blue-500 text-white'}`}
+        className={`w-full px-4 py-2 rounded ${loading ? 'bg-gray-500' : 'bg-red-500 text-white'}`}
       >
         {loading ? 'Confirming...' : 'Confirm Order'}
       </button>
