@@ -12,13 +12,13 @@ const UserMenu = () => {
         <div className="space-y-4">
           <Link
             to="/dashboard/user/profile"
-            className="block text-center bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600 shadow-md"
+            className="block text-center bg-red-500 text-white py-3 rounded-md hover:bg-red-600 shadow-md"
           >
            Update Profile
           </Link>
           <Link
             to={`/dashboard/user/orders/${auth.user._id}`}
-            className="block text-center bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600 shadow-md"
+            className="block text-center bg-red-500 text-white py-3 rounded-md hover:bg-red-600 shadow-md"
           >
             Orders
           </Link>
