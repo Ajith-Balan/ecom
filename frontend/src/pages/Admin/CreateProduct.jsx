@@ -65,9 +65,20 @@ const CreateProduct = () => {
       const { data } = await axios.post(`${import.meta.env.VITE_APP_BACKEND}/api/v1/product/create-product`, product);
       if (data?.success) {
         toast.success(data?.message);
-        setTimeout(() => {
-          navigate("/dashboard/admin/products");
-        }, 1000); 
+      setProduct({
+         name: '',
+    photo: '',
+    photo2: '',
+    photo3: '',
+    photo4: '',
+    photo5: '',
+    size: '',
+    description: '',
+    price: '',
+    MRP:'',
+    quantity: '',
+    category: '',
+      })
       } else {
         toast.error(data?.message || 'Product creation failed');
       }
