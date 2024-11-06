@@ -1,24 +1,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useState, useEffect } from 'react';
 import Layout from '../../components/layout/Layout';
 import axios from 'axios';
@@ -118,7 +100,7 @@ const OrdersList = () => {
   // Filter orders based on the selected status
   const filteredOrders = filterStatus === 'All' ? orders : orders.filter(order => order.status === filterStatus);
 
-  const statusOrder = ['Pending', 'Shipped', 'Delivered', 'Cancelled'];
+  const statusOrder = ['pending', 'Shipped', 'Delivered', 'Cancelled'];
   const statusHighlightColors = {
     Shipped: 'bg-blue-300 text-black',
     Delivered: 'bg-green-300 text-black',
@@ -143,7 +125,7 @@ const OrdersList = () => {
             <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-6">All Orders</h1>
 
             <div className="mb-4 w-full flex justify-center gap-1">
-              {['All', 'Pending', 'Shipped', 'Delivered', 'Cancelled'].map((status) => (
+              {['All', 'pending', 'Shipped', 'Delivered', 'Cancelled'].map((status) => (
                 <button
                   key={status}
                   onClick={() => setFilterStatus(status)}
