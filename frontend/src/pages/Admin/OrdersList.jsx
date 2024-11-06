@@ -1,3 +1,24 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React, { useState, useEffect } from 'react';
 import Layout from '../../components/layout/Layout';
 import axios from 'axios';
@@ -7,7 +28,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Modal from 'react-modal';
 
-Modal.setAppElement('#root');  // Make sure to bind modal to your app element (for accessibility)
+Modal.setAppElement('#root'); // For accessibility
 
 const OrdersList = () => {
   const [orders, setOrders] = useState([]);
@@ -17,6 +38,7 @@ const OrdersList = () => {
   const [auth] = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState('');
+  const [filterStatus, setFilterStatus] = useState('All'); // Filter status state
 
   const getOrders = async () => {
     try {
@@ -33,7 +55,7 @@ const OrdersList = () => {
             totalPrice: order.totalPrice,
             payment: order.payment,
             status: order.status,
-            ss: order.photo,  // Payment screenshot URL
+            ss: order.photo, // Payment screenshot URL
             name: order.userName,
             userPhone: order.userPhone,
             userPhone2: order.user2Phone,
@@ -48,6 +70,17 @@ const OrdersList = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  useEffect(() => {
+    if (auth?.user) {
+      getOrders();
+    }
+  }, [auth?.user]);
+
+  const handleRetry = () => {
+    setError(null);
+    getOrders();
   };
 
   const handleOrderChange = (orderId, field, value) => {
@@ -72,32 +105,18 @@ const OrdersList = () => {
     }
   };
 
-  useEffect(() => {
-    if (auth?.user) {
-      getOrders();
-    }
-  }, [auth?.user]);
-
-  const handleRetry = () => {
-    setError(null);  // Clear the error message
-    getOrders();     // Retry fetching orders
-  };
-
-  // Open the modal with the full-screen image
   const openModal = (imageSrc) => {
     setModalImage(imageSrc);
     setIsModalOpen(true);
   };
 
-  // Close the modal
   const closeModal = () => {
     setIsModalOpen(false);
     setModalImage('');
   };
 
-  if (loading) {
-    return <div className="text-center text-xl">Loading...</div>;
-  }
+  // Filter orders based on the selected status
+  const filteredOrders = filterStatus === 'All' ? orders : orders.filter(order => order.status === filterStatus);
 
   const statusOrder = ['Pending', 'Shipped', 'Delivered', 'Cancelled'];
   const statusHighlightColors = {
@@ -107,9 +126,9 @@ const OrdersList = () => {
     Cancelled: 'bg-red-300 text-black',
   };
 
-  const sortedOrders = [...orders].sort((a, b) => {
-    return statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status);
-  });
+  if (loading) {
+    return <div className="text-center text-xl">Loading...</div>;
+  }
 
   return (
     <Layout title={"Your Orders"}>
@@ -118,11 +137,24 @@ const OrdersList = () => {
 
       <div className="container mx-auto p-4 sm:p-5">
         <div className="flex flex-col lg:flex-row">
-          <div className="w-full lg:w-1/4 mb-5 lg:mb-0">
-          </div>
+         
 
           <div className="w-full lg:w-3/4 p-5 bg-white rounded-lg shadow-lg">
             <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-6">All Orders</h1>
+
+            <div className="mb-4 w-full flex justify-center gap-1">
+              {['All', 'Pending', 'Shipped', 'Delivered', 'Cancelled'].map((status) => (
+                <button
+                  key={status}
+                  onClick={() => setFilterStatus(status)}
+                  className={`px-2 py-2 text-sm w-full rounded-md font-semibold ${
+                    filterStatus === status ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'
+                  }`}
+                >
+                  {status}
+                     </button>
+              ))}
+            </div>
 
             {error && (
               <div className="text-red-500 mb-4">
@@ -130,13 +162,15 @@ const OrdersList = () => {
               </div>
             )}
 
-            {sortedOrders.length === 0 ? (
+            {filteredOrders.length === 0 ? (
               <div className="text-center text-gray-500">No orders found.</div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="min-w-full table-auto border-collapse">
                   <thead>
                     <tr>
+                    <th className="border px-2 py-2"> </th>
+
                       <th className="border px-2 py-2">Product</th>
                       <th className="border px-2 py-2">Quantity</th>
                       <th className="border px-2 py-2">Amount</th>
@@ -147,9 +181,12 @@ const OrdersList = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {sortedOrders.map((order) => (
+                    {filteredOrders.map((order,index) => (
                       <tr key={order._id}>
-                        <td className="border px-2 py-2">
+                         <td className="border px-2 py-2 text-center">
+                        {index + 1}
+                        </td>
+                      <td className="border px-2 py-2">
                           <div className="font-semibold">{orderDetails[order._id]?.productName || order.productName}</div>
                           <img
                             src={orderDetails[order._id]?.productphoto || order.productphoto}
@@ -159,6 +196,7 @@ const OrdersList = () => {
                         </td>
                         <td className="border px-2 py-2 text-center">
                           <input
+                          readOnly
                             type="number"
                             value={orderDetails[order._id]?.quantity || order.quantity}
                             onChange={(e) => handleOrderChange(order._id, 'quantity', e.target.value)}
@@ -166,15 +204,16 @@ const OrdersList = () => {
                           />
                         </td>
                         <td className="border px-2 py-2 text-center">
+                       
                           ₹{orderDetails[order._id]?.totalPrice || order.totalPrice}
                         </td>
                         <td className="border px-2 py-2 text-sm">
-                        <td className="border px-2 py-2 text-sm">
+                        <div className="border px-2 py-2 text-sm">
   <p><span className="font-semibold"> </span> {orderDetails[order._id]?.name || order.userName}</p>
   <p><span className="font-semibold">  </span> {orderDetails[order._id]?.userPhone || order.userPhone}</p>
   <p><span className="font-semibold">  </span> {orderDetails[order._id]?.userPhone2 || order.user2Phone}</p>
   <p><span className="font-semibold"> </span> {orderDetails[order._id]?.userAddress || order.userAddress}</p>
-</td>
+</div>
 
 
                         </td>
