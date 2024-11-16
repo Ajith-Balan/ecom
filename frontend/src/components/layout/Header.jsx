@@ -32,7 +32,7 @@ const Header = () => {
   const dashboardPath = `/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`;
 
   return (
-    <nav className="bg-red-600 w-full top-0">
+    <nav className="bg-red-600 w-full fixed z-10  top-0">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-10">
           {/* Logo */}
