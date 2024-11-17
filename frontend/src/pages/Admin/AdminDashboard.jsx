@@ -7,7 +7,7 @@ const AdminDashboard = () => {
   return (
   <div>
     <Layout title={'Dashboard -Admin'}>
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto mt-5 p-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="bg-gray-200 p-4 rounded">
 <AdminMenu/>
