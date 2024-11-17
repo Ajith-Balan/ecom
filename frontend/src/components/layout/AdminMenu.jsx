@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const AdminMenu = () => {
   return (
-    <div className="p-4">
+    <div className="p-4 mt-5">
       <div className="flex flex-col space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-4">
         <Link 
           to="/dashboard/admin/create-category" 
