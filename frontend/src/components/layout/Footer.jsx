@@ -34,7 +34,7 @@ const Footer = () => {
         {/* Copyright Section */}
         <div className="mt-4 text-center text-sm">
           <p>&copy; {new Date().getFullYear()} CJ ATTIRE. All rights reserved. </p>
-          <p >Transform your vision into a professional website that speaks volumes about your brand.  </p>
+          <p >Made with .  </p>
           <div className="max-w-7xl mx-auto flex justify-center space-x-4">
         <a 
           href="https://www.instagram.com/ajith____b?igsh=MTQ2Z3Nuc2RwejR2Mw==" 
@@ -42,9 +42,9 @@ const Footer = () => {
           rel="noopener noreferrer" 
           className="hover:text-gray-400"
         >
-          <FaInstagram className="h-6 w-6" />
+          Quick Tech
         </a>
-        <a 
+      {/*   <a 
           href="https://wa.me/8129718562" 
           target="_blank" 
           rel="noopener noreferrer" 
@@ -58,6 +58,7 @@ const Footer = () => {
         >
           <FaEnvelope className="h-6 w-6" />
         </a>
+        */}
       </div>
 
         </div>
