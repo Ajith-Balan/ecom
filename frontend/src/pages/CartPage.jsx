@@ -37,7 +37,7 @@ const CartPage = () => {
 
   return (
     <Layout>
-      <div className="p-6">
+      <div className="p-6 mt-5 pt-8">
         <h1 className="text-2xl font-bold mb-4">{`Hello, ${auth?.token && auth?.user?.name}`}</h1>
         <h4 className="text-lg mb-4">
           {cart.length > 0
