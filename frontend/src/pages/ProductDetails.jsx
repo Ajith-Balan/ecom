@@ -63,7 +63,7 @@ const ProductDetails = () => {
 
   return (
     <Layout>
-      <div className="container mx-auto p-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="container mx-auto p-4 mt-5 pt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Main Image Section */}
         <div className="w-full  max-w-xl mx-auto">
           <img
