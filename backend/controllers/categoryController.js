@@ -13,7 +13,7 @@ try {
             message:'category already exists'
         })
     }
-    const category = await new categoryModel.create({
+    const category = await  categoryModel.create({
       name,photo
     })
     res.status(201).send({
