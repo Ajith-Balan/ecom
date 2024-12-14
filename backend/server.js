@@ -23,7 +23,7 @@ app.use('/api/v1/product', productRoutes)
 
 
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 1000
 
 
 
