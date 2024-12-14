@@ -22,7 +22,7 @@ app.use('/api/v1/product', productRoutes);
 // MongoDB connection for pinging
 const client = new MongoClient(process.env.dburl, {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
+  
 });
 
 // Function to connect and ping MongoDB
