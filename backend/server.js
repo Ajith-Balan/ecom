@@ -20,7 +20,7 @@ app.use('/api/v1/category', categoryRoutes);
 app.use('/api/v1/product', productRoutes);
 
 // MongoDB connection for pinging
-const client = new MongoClient(process.env.MONGO_URI, {
+const client = new MongoClient(process.env.dburl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
